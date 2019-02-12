@@ -1,7 +1,7 @@
 ### Guess the Song from Lyrics Game Game
 - game play
   - select genre(s) / decade(s)
-  - 10 multiple-choice questions (surface lyric and set of artists)
+  - 10 multiple-choice questions (surface lyric and set of song names)
     - lyric == x lines from song
   - persist game record / leaderboard
   - reverse play (out of scope)
@@ -21,21 +21,42 @@
     - [ ] read its lyrics
       - store lyrics as array, delimited by '/n'
     - [ ] read its genre, release_date, artist
-  - Game / CLI
-    - welcoming player
-    - at end of game, asking a player to continue
-    - knowing who's playing
+  - Lyrics (HOLD)
+    - when game creates question set,
+  - Game / CLI (class can:)
+    - [ ] welcome player
+    - [ ] know who's playing (create new user OR load existing one)
+    - [ ] create question / answer set for game
+    - [ ] show correct answer and store player's question score
+      - write to game history after question answered
+    - [ ] show game score
     - knowing player history
       - might be better on Player
-    - creating question set for game
-    - creating answer set for game
     - giving a player its score
-    - showing a player if it answered the question correctly
+    - save info to db on answering a question
+    - at end of game, asking a player to continue
   - Probably Out of Scope
     - hints (add another line of lyrics)
     - reverse play
 - DB Tables
   - players
+    - id
+    - name
+  - game_history
+    - id
+    - player_id
+    - game_mode (?)
+    - question_score
+    - question_asked
   - artists
+    - id
+    - name (array)
   - songs
-  - game_records
+    - id
+    - title
+    - release_date
+  <!-- - lyrics
+    - id
+    - song_id
+    - artist_id
+    - content -->

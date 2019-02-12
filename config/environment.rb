@@ -9,3 +9,6 @@ ActiveRecord::Base.establish_connection(
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 require_all 'app'
+# require 'rest-client'
+require "uri"
+require "net/http"
