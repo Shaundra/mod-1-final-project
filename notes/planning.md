@@ -1,0 +1,41 @@
+### Guess the Song from Lyrics Game Game
+- game play
+  - select genre(s) / decade(s)
+  - 10 multiple-choice questions (surface lyric and set of artists)
+    - lyric == x lines from song
+  - persist game record / leaderboard
+  - reverse play (out of scope)
+- User Stories
+  - As a player, I'd like my game record to be remembered so that I can access it.
+  - As a player, I'd like to direct game play by choosing genre(s) / decade(s). (MVP)
+  - As a player, I expect to be shown a set of multiple-choice questions to answer and when answered I expect to be told if I was correct. (MVP)
+  - As a player, I expect my answers to be scored (and that score saved.) (MVP)
+  - As a player, I expect to be able to play multiple rounds without being "signed-out." (MVP)
+- Actions
+  - Player (class can:)
+    - [ ] read its score
+    - [ ] read its score by genre / decade
+  - Artist (class can:)
+    - [ ] read its songs
+  - Song (class can:)
+    - [ ] read its lyrics
+      - store lyrics as array, delimited by '/n'
+    - [ ] read its genre, release_date, artist
+  - Game / CLI
+    - welcoming player
+    - at end of game, asking a player to continue
+    - knowing who's playing
+    - knowing player history
+      - might be better on Player
+    - creating question set for game
+    - creating answer set for game
+    - giving a player its score
+    - showing a player if it answered the question correctly
+  - Probably Out of Scope
+    - hints (add another line of lyrics)
+    - reverse play
+- DB Tables
+  - players
+  - artists
+  - songs
+  - game_records
