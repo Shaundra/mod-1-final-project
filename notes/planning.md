@@ -64,3 +64,14 @@
     - song_id
     - artist_id
     - content -->
+- Deliverables
+  - Video Demo
+    - Requirements
+      - <= 2 minute overview of project
+      - narration
+  - Presentation
+    - Requirements:
+      - Describe something you struggled to build, and show us how you ultimately implemented it in your code.
+      - Discuss 3 things you learned in the process of working on this project.
+      - Address, if anything, what you would change or add to what you have today?
+      - Present any code you would like to highlight.
