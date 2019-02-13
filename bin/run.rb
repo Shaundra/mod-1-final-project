@@ -1,11 +1,9 @@
 require_relative "../config/environment"
 # require_relative "./cli.rb"
 
-raw_songs_artists = convert_songs_to_json("artists")
-flatten_artists(raw_songs_artists)
-raw_songs_lyrics = convert_songs_to_json("lyrics")
-complete_songs = merge_lyrics_songs(raw_songs_artists, raw_songs_lyrics)
-remove_no_lyric_songs(complete_songs)
+def rake(*tasks)
+  tasks.each { |task| Rake.application[task].tap(&:invoke).tap(&:reenable) }
+end
 
-seed_songs(complete_songs)
-seed_artists(complete_songs)
+# not a robust check, good enough for now
+rake("db:seed") if Song.none?

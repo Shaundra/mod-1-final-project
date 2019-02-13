@@ -32,10 +32,24 @@ def remove_no_lyric_songs(songs_array)
   songs_array.delete_if { |song| song["lyrics"].empty? }
 end
 
+# not fully tested
+def lyrics_to_array(songs_array)
+  songs_array.map do |song|
+    song["lyrics"] = song["lyrics"][0]["lyrics"].split("\r\n")
+    song["lyrics"].delete_if { |line| line.empty? }
+  end
+end
+
 def seed_songs(songs_array)
-  songs_array.each { |song| Song.create(title: song["title"], release_date: song["released"], lyrics: song["lyrics"][0]["lyrics"]) }
+  songs_array.each do |song|
+    Song.create(title: song["title"], release_date: song["released"], lyrics: song["lyrics"][0]["lyrics"])
+  end
 end
 
 def seed_artists(songs_array)
   songs_array.each { |song| Artist.create(name: song["artists"]) }
+end
+
+def check_if_db_seeded
+
 end

@@ -26,14 +26,21 @@
   - GameInterface / CLI (class can:)
     - [ ] welcome player
     - [ ] show game score
-    - knowing player history
-      - might be better on Player
+    - [ ] display a menu (and take action based on `stdin`)
+      - at beginning of game
+        - ask for Player name, and check if exists
+          - if exists, confirm that existing instance matches current
+          - if doesn't exist, create new Player
+        - view leaderboard
+        - view Player history
+        - choose game mode
+      - [ ] at end of game, asking a player to continue
+      - [ ] display player history
     - giving a player its score
-    - at end of game, asking a player to continue
   - Game
     - [ ] know who's playing (create new user OR load existing one)
     - [ ] create question / answer set for game
-    - [ ] show correct answer and pass player's question score to GameHistory
+    - [ ] show correct answer and pass player's question score to GameRecord
   - GameRecord
     - save info to db on answering a question
   - Probably Out of Scope
