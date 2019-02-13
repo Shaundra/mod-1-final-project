@@ -1,0 +1,99 @@
+### Guess the Song from Lyrics Game Game
+- game play
+  - select genre(s) / decade(s)
+  - 10 multiple-choice questions (surface lyric and set of song names)
+    - lyric == x lines from song
+  - persist game record / leaderboard
+  - reverse play (out of scope)
+- User Stories
+  - As a player, I'd like my game record to be remembered so that I can access it.
+  - As a player, I'd like to direct game play by choosing genre(s) / decade(s). (MVP)
+  - As a player, I expect to be shown a set of multiple-choice questions to answer and when answered I expect to be told if I was correct. (MVP)
+  - As a player, I expect my answers to be scored (and that score saved.) (MVP)
+  - As a player, I expect to be able to play multiple rounds without being "signed-out." (MVP)
+- Actions
+  - Player (class can:)
+    - [ ] read its score
+    - [ ] read its score by genre / decade
+  - Artist (class can:)
+    - [ ] read its songs
+  - Song (class can:)
+    - [ ] read its lyrics
+      - store lyrics as array, delimited by '/n'
+    - [ ] read its genre, release_date, artist
+  - Lyrics (HOLD)
+    - when game creates question set,
+  - GameInterface / CLI (class can:)
+    - [ ] welcome player
+    - [ ] show game score
+    - [ ] display a menu (and take action based on `stdin`)
+      - at beginning of game
+        - ask for Player name, and check if exists
+          - if exists, confirm that existing instance matches current
+          - if doesn't exist, create new Player
+        - view leaderboard
+        - view Player history
+        - choose game mode
+      - [ ] at end of game, asking a player to continue
+      - [ ] display player history
+    - giving a player its score
+    - on game end, tell player game's over, show score, display menu options
+  - Game
+    - [ ] know who's playing (create new user OR load existing one)
+    - [ ] create question / answer set for game
+      - question set 5 multiple choice questions
+      - a question contains 2 lyric-lines and 4 artist name answers (1 correct)
+    - [ ] score player's response
+      - correct answers worth 10 points
+      - incorrect answers worth 0 points
+    - [ ] show correct answer  
+    - [ ] pass player's question score to GameRecord
+    -
+  - GameRecord
+    - save info to db on answering a question
+  - Probably Out of Scope
+    - hints (add another line of lyrics)
+    - reverse play
+- DB Tables
+  - players
+    - id
+    - name
+  - games
+    - id
+    - player_id
+    - (game_mode)
+  - game_records
+    - game_id
+    - song_id
+    - points
+  - artists
+    - id
+    - name (array)
+    - unique on name (TO-DO)
+  - songs
+    - id
+    - title
+    - release_date
+    - lyrics
+  <!-- - lyrics
+    - id
+    - song_id
+    - artist_id
+    - content -->
+- Deliverables
+  - Repo
+    - README.md
+      - [ ] short description
+      - [ ] install instructions
+      - [ ] contributors guide
+      - [ ] link to license
+  - Video Demo
+    - Requirements
+      - <= 2 minute overview of project
+      - narration
+  - Presentation
+    - Requirements:
+      - Describe something you struggled to build, and show us how you ultimately implemented it in your code.
+      - Discuss 3 things you learned in the process of working on this project.
+      - Address, if anything, what you would change or add to what you have today?
+      - Present any code you would like to highlight.

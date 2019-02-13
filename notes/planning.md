@@ -44,6 +44,7 @@
       - question set 5 multiple choice questions
       - a question contains 2 lyric-lines and 4 artist name answers (1 correct)
     - [ ] score player's response
+      - [ ] validate player response is an integer
       - correct answers worth 10 points
       - incorrect answers worth 0 points
     - [ ] show correct answer  
@@ -69,11 +70,13 @@
   - artists
     - id
     - name (array)
+      - unique on name (TO-DO)
   - songs
     - id
     - title
     - release_date
     - lyrics
+      - remove songs with only 1 line of lyrics? (TO-DO)
   <!-- - lyrics
     - id
     - song_id
