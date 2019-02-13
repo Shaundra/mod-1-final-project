@@ -1,5 +1,3 @@
-
-# run twice once with "artists" and again with "lyrics"
 def get_all_songs_with_(header)
   url = URI("https://musicdemons.com/api/v1/song")
   https = Net::HTTP.new(url.host, url.port)
@@ -17,18 +15,22 @@ def convert_songs_to_json(header)
 end
 
 def flatten_artists(songs_array)
-  songs_array.each_with_object([]) do |song, arr|
+  songs_array.each do |song, arr|
     song["artists"] = song["artists"].map { |artist| artist["name"] }.join(" & ")
   end
 end
 
 def merge_lyrics_songs(songs, lyrics)
-  songs.each do |song|
+  songs.each_with_object([]) do |song, new_arr|
     song_lyrics = lyrics.select { |elmt| elmt["id"] == song["id"] }.first
-    song.merge(song_lyrics)
+    new_arr << song.merge(song_lyrics)
   end
 end
 
+def remove_no_lyric_songs(songs_array)
+  # there are 88 songs without lyrics
+  songs_array.delete_if { |song| song["lyrics"].empty? }
+end
 # raw_songs_artists = convert_songs_to_json("artists")
 # raw_songs_lyrics = convert_songs_to_json("lyrics")
 #
