@@ -65,6 +65,12 @@
     - artist_id
     - content -->
 - Deliverables
+  - Repo
+    - README.md
+      - [ ] short description
+      - [ ] install instructions
+      - [ ] contributors guide
+      - [ ] link to license
   - Video Demo
     - Requirements
       - <= 2 minute overview of project
