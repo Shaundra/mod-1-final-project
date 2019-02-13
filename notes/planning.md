@@ -23,18 +23,19 @@
     - [ ] read its genre, release_date, artist
   - Lyrics (HOLD)
     - when game creates question set,
-  - Game / CLI (class can:)
+  - GameInterface / CLI (class can:)
     - [ ] welcome player
-    - [ ] know who's playing (create new user OR load existing one)
-    - [ ] create question / answer set for game
-    - [ ] show correct answer and store player's question score
-      - write to game history after question answered
     - [ ] show game score
     - knowing player history
       - might be better on Player
     - giving a player its score
-    - save info to db on answering a question
     - at end of game, asking a player to continue
+  - Game
+    - [ ] know who's playing (create new user OR load existing one)
+    - [ ] create question / answer set for game
+    - [ ] show correct answer and pass player's question score to GameHistory
+  - GameRecord
+    - save info to db on answering a question
   - Probably Out of Scope
     - hints (add another line of lyrics)
     - reverse play
@@ -42,12 +43,14 @@
   - players
     - id
     - name
-  - game_history
+  - games
     - id
     - player_id
-    - game_mode (?)
-    - question_score
-    - question_asked
+    - (game_mode)
+  - game_records
+    - game_id
+    - song_id
+    - points
   - artists
     - id
     - name (array)
@@ -55,6 +58,7 @@
     - id
     - title
     - release_date
+    - lyrics
   <!-- - lyrics
     - id
     - song_id
