@@ -1,17 +1,9 @@
 class GameInterface
-<<<<<<< HEAD
-  def welcome
-    puts "Welcome message! With things you can do"
-  end
-
-  def find_player(player_name)
-=======
   def self.welcome
     puts "Welcome message! With things you can do"
   end
 
   def self.find_player(player_name)
->>>>>>> shaundra-working-branch
     Player.find_or_create_by(player_name)
   end
 
