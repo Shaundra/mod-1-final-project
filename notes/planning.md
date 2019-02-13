@@ -37,10 +37,18 @@
       - [ ] at end of game, asking a player to continue
       - [ ] display player history
     - giving a player its score
+    - on game end, tell player game's over, show score, display menu options
   - Game
     - [ ] know who's playing (create new user OR load existing one)
     - [ ] create question / answer set for game
-    - [ ] show correct answer and pass player's question score to GameRecord
+      - question set 5 multiple choice questions
+      - a question contains 2 lyric-lines and 4 artist name answers (1 correct)
+    - [ ] score player's response
+      - correct answers worth 10 points
+      - incorrect answers worth 0 points
+    - [ ] show correct answer  
+    - [ ] pass player's question score to GameRecord
+    -
   - GameRecord
     - save info to db on answering a question
   - Probably Out of Scope

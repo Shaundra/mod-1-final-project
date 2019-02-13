@@ -42,14 +42,10 @@ end
 
 def seed_songs(songs_array)
   songs_array.each do |song|
-    Song.create(title: song["title"], release_date: song["released"], lyrics: song["lyrics"][0]["lyrics"])
+    Song.create(title: song["title"], release_date: song["released"], lyrics: song["lyrics"])
   end
 end
 
 def seed_artists(songs_array)
   songs_array.each { |song| Artist.create(name: song["artists"]) }
-end
-
-def check_if_db_seeded
-
 end
