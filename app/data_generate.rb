@@ -31,11 +31,6 @@ def remove_no_lyric_songs(songs_array)
   # there are 88 songs without lyrics
   songs_array.delete_if { |song| song["lyrics"].empty? }
 end
-# raw_songs_artists = convert_songs_to_json("artists")
-# flatten_artists(raw_songs_artists)
-# raw_songs_lyrics = convert_songs_to_json("lyrics")
-# complete_songs = merge_lyrics_songs(raw_songs_artists, raw_songs_lyrics)
-# remove_no_lyric_songs(complete_songs)
 
 def seed_songs(songs_array)
   songs_array.each { |song| Song.create(title: song["title"], release_date: song["released"], lyrics: song["lyrics"][0]["lyrics"]) }
