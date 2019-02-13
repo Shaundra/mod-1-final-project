@@ -12,3 +12,4 @@ require_all 'app'
 # require 'rest-client'
 require "uri"
 require "net/http"
+require 'rake'
