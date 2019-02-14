@@ -1,6 +1,6 @@
 class GameInterface
   def self.welcome
-    puts '
+    puts "
     _____
    |   __|_ _ ___ ___ ___
    |  |  | | | -_|_ -|_ -|
@@ -14,37 +14,37 @@ class GameInterface
    |  |__| | |  _| |  _|_ -|
    |_____|_  |_| |_|___|___|
          |___|
-   '
+   "
   end
 
   def self.menu
-    puts '
+    puts "
         1 - New Game
         2 - Leaderboard
         3 - Player History
         0 - Exit Game
-        '
+        "
     get_menu_input()
   end
 
-  def self.get_menu_input(arg=nil)
-    if arg == 'try again'
-      puts 'Please input a command'
+  def self.get_menu_input(arg = nil)
+    if arg == "try again"
+      puts "Please input a command"
     end
 
     input = gets.chomp
 
     case input
-    when '1'
+    when "1"
       current_player = ask_player_name
       play_game(current_player)
       continue(current_player)
-    when '2'
+    when "2"
       Game.display_leaderboard
-    when '3'
+    when "3"
       display_user_history
-    when '0' then abort('Thank you for playing')
-    else get_menu_input('try again')
+    when "0" then abort("Thank you for playing")
+    else get_menu_input("try again")
     end
   end
 
@@ -66,7 +66,7 @@ class GameInterface
 
   def self.continue(current_player)
     loop do
-      puts "Would you like to start a new game, #{current_player.name}? [Y/N]"
+      puts "\n\nWould you like to start a new game, #{current_player.name}? [Y/N]"
       input = gets.chomp.downcase
 
       if input == "y"
@@ -84,7 +84,7 @@ class GameInterface
     linewidth = 100
 
     if display_user
-      puts "Game".ljust(linewidth/4) + "Score".ljust(linewidth/4) + "Correct Answers".ljust(linewidth/4) + "Incorrect Answers".ljust(linewidth/4)
+      puts "Game".ljust(linewidth / 4) + "Score".ljust(linewidth / 4) + "Correct Answers".ljust(linewidth / 4) + "Incorrect Answers".ljust(linewidth / 4)
 
       display_user.games.each_with_index do |game, idx|
         score = game.game_records.sum(:points).to_s
@@ -95,6 +95,5 @@ class GameInterface
     else
       puts "That user wasn't found."
     end
-
   end
 end

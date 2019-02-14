@@ -48,8 +48,8 @@ class Game < ActiveRecord::Base
     question_set.each do |question|
       display_question(question)
       response = STDIN.gets.chomp.to_i
-      loop do 
-        if !([1,2,3,4].include? response)
+      loop do
+        if !([1, 2, 3, 4].include? response)
           puts "Please give an answer between 1 and 4."
           response = STDIN.gets.chomp.to_i
         else
@@ -85,15 +85,20 @@ class Game < ActiveRecord::Base
   end
 
   def show_ending_game_score
-    puts "Game Over\n"
-    game_score = self.game_records.sum("points")
-    puts "Your score for the game is #{game_score}.\n"
+    game_over_text = generate_ascii("Game Over")
+    longest_line = longest_line = game_over_text.split("\n").max_by(&:size).size
+    game_score = self.game_records.sum("points").to_s
+
+    puts game_over_text
+    puts "You Scored".center(longest_line)
+    generate_ascii(game_score).split("\n").each { |line| puts line.center(longest_line) }
+    puts "Points!".center(longest_line)
   end
 
   def self.display_leaderboard
     total_scores = Player.all.each_with_object({}) do |player, ttl_score|
-                      ttl_score[player.name] = player.game_records.sum("points")
-                    end
+      ttl_score[player.name] = player.game_records.sum("points")
+    end
 
     longest_name_length = total_scores.max_by { |k, v| k.length }.first.length
     total_scores = total_scores.sort_by { |k, v| -v }
