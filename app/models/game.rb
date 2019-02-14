@@ -76,4 +76,10 @@ class Game < ActiveRecord::Base
     puts "You scored #{self.game_records.last.points} points!\n\n"
   end
 
+  def show_ending_game_score
+    puts "Game Over\n"
+    game_score = self.game_records.sum("points")
+    puts "Your score for the game is #{game_score}.\n"
+  end
+
 end

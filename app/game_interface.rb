@@ -36,7 +36,7 @@ class GameInterface
     case input
     when '1'
       current_player = ask_player_name
-      start_game(current_player) #replace with start_game method
+      play_game(current_player) #replace with start_game method
       continue(current_player)
     when '2' then puts 'leaderboard' #replace with leaderboard method
     when '0' then abort('Thank you for playing')
@@ -44,11 +44,12 @@ class GameInterface
     end
   end
 
-  def self.start_game(current_player)
+  def self.play_game(current_player)
     new_game = Game.create
     new_game.player = current_player
     new_game.save
     new_game.ask_questions(3)
+    new_game.show_ending_game_score
   end
 
   def self.ask_player_name
@@ -65,7 +66,7 @@ class GameInterface
       input = gets.chomp.downcase
 
       if input == "y"
-        start_game(current_player)
+        play_game(current_player)
       else
         break
       end
