@@ -82,4 +82,15 @@ class Game < ActiveRecord::Base
     puts "Your score for the game is #{game_score}.\n"
   end
 
+  def self.display_leaderboard
+    total_scores = Player.all.each_with_object({}) do |player, ttl_score|
+                      ttl_score[player.name] = player.game_records.sum("points")
+                    end
+
+    longest_name_length = total_scores.max_by { |k, v| k.length }.first.length
+    total_scores = total_scores.sort_by { |k, v| -v }
+    total_scores.first(10).each do |plr_scr|
+      puts "#{plr_scr[0].ljust(longest_name_length)} - #{plr_scr[1].to_s.rjust(4)}"
+    end
+  end
 end
