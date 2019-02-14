@@ -48,6 +48,14 @@ class Game < ActiveRecord::Base
     question_set.each do |question|
       display_question(question)
       response = STDIN.gets.chomp.to_i
+      loop do 
+        if !([1,2,3,4].include? response)
+          puts "Please give an answer between 1 and 4."
+          response = STDIN.gets.chomp.to_i
+        else
+          break
+        end
+      end
       response_artist = question[:display_answers][response - 1]
       save_answered_question(question, response_artist)
       display_correct_answer_and_score(question)
