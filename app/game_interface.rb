@@ -17,14 +17,6 @@ class GameInterface
    '
   end
 
-  def self.find_player(player_name)
-    Player.find_or_create_by(player_name)
-  end
-
-  def display_menu
-
-  end
-
   def self.menu
     puts '
           1 - New Game
@@ -60,6 +52,17 @@ class GameInterface
   def self.ask_player_name
     puts "Who are you? Have we met before?"
     player_name = gets.chomp
-    Player.find_or_create_by(name: player_name)
+    current_player = Player.find_or_create_by(name: player_name)
+    puts "Nice to see you #{current_player.name}. Let's get started."
+  end
+
+  def self.continue
+    puts "Would you like to start a new game? [Y/N]"
+    input = gets.chomp.downcase
+    if input == "y"
+      start_game
+    else
+      menu
+    end
   end
 end
