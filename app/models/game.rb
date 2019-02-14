@@ -15,7 +15,7 @@ class Game < ActiveRecord::Base
     question[:song_id] = song[:id]
     question[:guessing_lyric] = choose_lyrics_line(lyrics_to_array(song)).join("\n")
     question[:correct_answer] = song.artist.name
-    3.times { question[:incorrect_answers] << choose_random_artist(song) }
+    3.times { question[:incorrect_answers] << Game.choose_random_artist(song) }
     question[:display_answers] = question[:incorrect_answers]
     question[:display_answers] << question[:correct_answer]
     question[:display_answers].shuffle!
@@ -23,10 +23,10 @@ class Game < ActiveRecord::Base
     question
   end
 
-  def choose_random_artist(song)
+  def self.choose_random_artist(song)
     rand_artist = Artist.all.sample
     if rand_artist.name == song.artist.name
-      choose_random_artists(song)
+      Game.choose_random_artists(song)
     else
       rand_artist.name
     end
@@ -49,14 +49,13 @@ class Game < ActiveRecord::Base
       display_question(question)
       response = STDIN.gets.chomp.to_i
       response_artist = question[:display_answers][response - 1]
-      display_correct_answer_and_score(question, response_artist)
+      save_answered_question(question, response_artist)
+      display_correct_answer_and_score(question)
     end
   end
 
   def display_question(question)
-    puts "
-    Who sang these lyrics?\n
-    #{question[:guessing_lyric]}"
+    puts "\nWho sang these lyrics?\n\n#{question[:guessing_lyric]}\n\n"
     question[:display_answers].each_with_index { |answer, i| puts "#{i + 1}. #{answer}" }
   end
 
@@ -64,16 +63,17 @@ class Game < ActiveRecord::Base
     player_response == answer ? 10 : 0
   end
 
-  def save_answered_question(question)
-    save = GameRecord.create
-    save.song_id = question[:song_id]
-    save.points = score_response(response, question[:correct_answer])
-    save.game_id = self.id
+  def save_answered_question(question, response)
+    saved_question = GameRecord.create
+    saved_question.song_id = question[:song_id]
+    saved_question.points = score_response(response, question[:correct_answer])
+    saved_question.game_id = self.id
+    saved_question.save
   end
 
-  def display_correct_answer_and_score(question, response)
+  def display_correct_answer_and_score(question)
     puts "\nThe correct answer is #{question[:correct_answer]}"
-    puts "You scored #{self.game_records.points} points!\n\n"
+    puts "You scored #{self.game_records.last.points} points!\n\n"
   end
 
 end

@@ -50,6 +50,16 @@ class GameInterface
   end
 
   def self.start_game
-    Game.create.ask_questions(3)
+    current_player = ask_player_name
+    new_game = Game.create
+    new_game.player = current_player
+    new_game.save
+    new_game.ask_questions(3)
+  end
+
+  def self.ask_player_name
+    puts "Who are you? Have we met before?"
+    player_name = gets.chomp
+    Player.find_or_create_by(name: player_name)
   end
 end
