@@ -19,9 +19,10 @@ class GameInterface
 
   def self.menu
     puts '
-          1 - New Game
-          2 - Leaderboard
-          0 - Exit Game
+        1 - New Game
+        2 - Leaderboard
+        3 - Player History
+        0 - Exit Game
         '
     get_menu_input()
   end
@@ -38,7 +39,10 @@ class GameInterface
       current_player = ask_player_name
       play_game(current_player)
       continue(current_player)
-    when '2' then Game.display_leaderboard
+    when '2'
+      Game.display_leaderboard
+    when '3'
+      display_user_history
     when '0' then abort('Thank you for playing')
     else get_menu_input('try again')
     end
@@ -73,4 +77,24 @@ class GameInterface
     end
   end
 
+  def self.display_user_history
+    puts "Whose history would you like to see?"
+    user_name = STDIN.gets.chomp
+    display_user = Player.find_by(name: user_name)
+    linewidth = 100
+
+    if display_user
+      puts "Game".ljust(linewidth/4) + "Score".ljust(linewidth/4) + "Correct Answers".ljust(linewidth/4) + "Incorrect Answers".ljust(linewidth/4)
+
+      display_user.games.each_with_index do |game, idx|
+        score = game.game_records.sum(:points).to_s
+        correct_ct = game.game_records.group("points > 0").having("points > 0").count.values[0].to_s
+        incorrect_ct = game.game_records.group(:points).having("points = 0").count.values[0].to_s
+        puts "#{("Game " + (idx + 1).to_s).ljust(linewidth / 4)} #{score.ljust(linewidth / 4)} #{correct_ct.ljust(linewidth / 4)} #{incorrect_ct.ljust(linewidth / 4)}"
+      end
+    else
+      puts "That user wasn't found."
+    end
+
+  end
 end
