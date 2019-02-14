@@ -9,5 +9,5 @@ require_relative "../config/environment"
 # exec("ruby ../db/seeds.rb") if Song.none?
 require_relative "../db/seeds.rb" if Song.none?
 
-# GameInterface.welcome
-# GameInterface.menu
+GameInterface.welcome
+GameInterface.menu

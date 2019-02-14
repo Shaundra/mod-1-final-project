@@ -1,6 +1,20 @@
 class GameInterface
   def self.welcome
-    puts "Welcome message! With things you can do"
+    puts '
+    _____                   
+   |   __|_ _ ___ ___ ___   
+   |  |  | | | -_|_ -|_ -|  
+   |_____|___|___|___|___|  
+    _____                   
+   |   __|___ ___ _____     
+   |   __|  _| . |     |    
+   |__|  |_| |___|_|_|_|                               
+    __            _         
+   |  |   _ _ ___|_|___ ___ 
+   |  |__| | |  _| |  _|_ -|
+   |_____|_  |_| |_|___|___|
+         |___|              
+   '
   end
 
   def self.find_player(player_name)
@@ -28,10 +42,14 @@ class GameInterface
     input = gets.chomp
 
     case input
-    when '1' then puts 'start_game' #replace with start_game method
+    when '1' then start_game() #replace with start_game method
     when '2' then puts 'leaderboard' #replace with leaderboard method
     when '0' then abort('Thank you for playing')
     else get_menu_input('try again')
     end
+  end
+
+  def self.start_game
+    Game.create.ask_questions(3)
   end
 end

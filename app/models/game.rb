@@ -54,7 +54,9 @@ class Game < ActiveRecord::Base
   end
 
   def display_question(question)
-    puts "Who sang these lyrics? \n #{question[:guessing_lyric]}"
+    puts "
+    Who sang these lyrics?\n
+    #{question[:guessing_lyric]}"
     question[:display_answers].each_with_index { |answer, i| puts "#{i + 1}. #{answer}" }
   end
 
@@ -62,9 +64,16 @@ class Game < ActiveRecord::Base
     player_response == answer ? 10 : 0
   end
 
+  def save_answered_question(question)
+    save = GameRecord.create
+    save.song_id = question[:song_id]
+    save.points = score_response(response, question[:correct_answer])
+    save.game_id = self.id
+  end
+
   def display_correct_answer_and_score(question, response)
-    puts "\n The correct answer is #{question[:correct_answer]}"
-    puts "You scored #{score_response(response, question[:correct_answer])} points! \n"
+    puts "\nThe correct answer is #{question[:correct_answer]}"
+    puts "You scored #{self.game_records.points} points!\n\n"
   end
 
 end
