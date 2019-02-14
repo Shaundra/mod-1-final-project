@@ -19,10 +19,10 @@ class GameInterface
 
   def self.menu
     puts "
-        1 - New Game
-        2 - Leaderboard
-        3 - Player History
-        0 - Exit Game
+      1 - New Game
+      2 - Leaderboard
+      3 - Player History
+      0 - Exit Game
         "
     get_menu_input()
   end
@@ -81,16 +81,17 @@ class GameInterface
     puts "Whose history would you like to see?"
     user_name = STDIN.gets.chomp
     display_user = Player.find_by(name: user_name)
-    linewidth = 100
+    linewidth = 20
 
     if display_user
-      puts "Game".ljust(linewidth / 4) + "Score".ljust(linewidth / 4) + "Correct Answers".ljust(linewidth / 4) + "Incorrect Answers".ljust(linewidth / 4)
+      generate_ascii(display_user.name).split("\n").each { |line| puts line.center(80) }
+      puts "Game".ljust(linewidth) + "Score".ljust(linewidth) + "Correct Answers".ljust(linewidth) + "Incorrect Answers".ljust(linewidth)
 
       display_user.games.each_with_index do |game, idx|
         score = game.game_records.sum(:points).to_s
         correct_ct = game.game_records.group("points > 0").having("points > 0").count.values[0].to_s
         incorrect_ct = game.game_records.group(:points).having("points = 0").count.values[0].to_s
-        puts "#{("Game " + (idx + 1).to_s).ljust(linewidth / 4)} #{score.ljust(linewidth / 4)} #{correct_ct.ljust(linewidth / 4)} #{incorrect_ct.ljust(linewidth / 4)}"
+        puts "#{("Game " + (idx + 1).to_s).ljust(linewidth)} #{score.ljust(linewidth)} #{correct_ct.ljust(linewidth)} #{incorrect_ct.ljust(linewidth)}"
       end
     else
       puts "That user wasn't found."
