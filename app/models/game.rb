@@ -96,14 +96,18 @@ class Game < ActiveRecord::Base
   end
 
   def self.display_leaderboard
+    generate_ascii("Top 10").split("\n").each { |line| puts line.center(60) }
     total_scores = Player.all.each_with_object({}) do |player, ttl_score|
       ttl_score[player.name] = player.game_records.sum("points")
     end
 
+    puts "\n"
     longest_name_length = total_scores.max_by { |k, v| k.length }.first.length
+    puts "#{"Player".ljust(longest_name_length)} - #{"Score".rjust(4)}".center(60)
+    puts "--------------".center(60)
     total_scores = total_scores.sort_by { |k, v| -v }
     total_scores.first(10).each do |plr_scr|
-      puts "#{plr_scr[0].ljust(longest_name_length)} - #{plr_scr[1].to_s.rjust(4)}"
+      puts "#{plr_scr[0].ljust(longest_name_length)} - #{plr_scr[1].to_s.rjust(4)}".center(60)
     end
   end
 end
