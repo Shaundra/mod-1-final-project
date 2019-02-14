@@ -36,9 +36,9 @@ class GameInterface
     case input
     when '1'
       current_player = ask_player_name
-      play_game(current_player) #replace with start_game method
+      play_game(current_player)
       continue(current_player)
-    when '2' then Game.display_leaderboard #replace with leaderboard method
+    when '2' then Game.display_leaderboard
     when '0' then abort('Thank you for playing')
     else get_menu_input('try again')
     end
@@ -72,4 +72,5 @@ class GameInterface
       end
     end
   end
+
 end

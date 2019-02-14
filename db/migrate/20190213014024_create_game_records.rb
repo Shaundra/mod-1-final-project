@@ -4,6 +4,8 @@ class CreateGameRecords < ActiveRecord::Migration[5.2]
       t.references :game
       t.references :song
       t.integer :points
+
+      t.timestamps      
     end
   end
 end

@@ -42,8 +42,8 @@ end
 def seed_songs_and_artists(songs_array)
   songs_array.each do |song|
     new_song = Song.create(title: song["title"], release_date: song["released"], lyrics: song["lyrics"][0]["lyrics"])
-    Artist.create(name: song["artists"])
-    new_song.artist_id = Artist.last.id
+    new_artist = Artist.find_or_create_by(name: song["artists"])
+    new_song.artist_id = new_artist.id
     new_song.save
   end
 end
