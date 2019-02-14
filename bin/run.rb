@@ -10,5 +10,6 @@ require_relative "../config/environment"
 require_relative "../db/seeds.rb" if Song.none?
 
 GameInterface.welcome
-GameInterface.menu
-GameInterface.continue
+loop do
+  GameInterface.menu
+end

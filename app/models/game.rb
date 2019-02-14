@@ -26,7 +26,7 @@ class Game < ActiveRecord::Base
   def self.choose_random_artist(song)
     rand_artist = Artist.all.sample
     if rand_artist.name == song.artist.name
-      Game.choose_random_artists(song)
+      Game.choose_random_artist(song)
     else
       rand_artist.name
     end

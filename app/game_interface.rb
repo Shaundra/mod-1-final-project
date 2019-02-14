@@ -1,19 +1,19 @@
 class GameInterface
   def self.welcome
     puts '
-    _____                   
-   |   __|_ _ ___ ___ ___   
-   |  |  | | | -_|_ -|_ -|  
-   |_____|___|___|___|___|  
-    _____                   
-   |   __|___ ___ _____     
-   |   __|  _| . |     |    
-   |__|  |_| |___|_|_|_|                               
-    __            _         
-   |  |   _ _ ___|_|___ ___ 
+    _____
+   |   __|_ _ ___ ___ ___
+   |  |  | | | -_|_ -|_ -|
+   |_____|___|___|___|___|
+    _____
+   |   __|___ ___ _____
+   |   __|  _| . |     |
+   |__|  |_| |___|_|_|_|
+    __            _
+   |  |   _ _ ___|_|___ ___
    |  |__| | |  _| |  _|_ -|
    |_____|_  |_| |_|___|___|
-         |___|              
+         |___|
    '
   end
 
@@ -34,15 +34,17 @@ class GameInterface
     input = gets.chomp
 
     case input
-    when '1' then start_game() #replace with start_game method
+    when '1'
+      current_player = ask_player_name
+      start_game(current_player) #replace with start_game method
+      continue(current_player)
     when '2' then puts 'leaderboard' #replace with leaderboard method
     when '0' then abort('Thank you for playing')
     else get_menu_input('try again')
     end
   end
 
-  def self.start_game
-    current_player = ask_player_name
+  def self.start_game(current_player)
     new_game = Game.create
     new_game.player = current_player
     new_game.save
@@ -54,15 +56,19 @@ class GameInterface
     player_name = gets.chomp
     current_player = Player.find_or_create_by(name: player_name)
     puts "Nice to see you #{current_player.name}. Let's get started."
+    current_player
   end
 
-  def self.continue
-    puts "Would you like to start a new game? [Y/N]"
-    input = gets.chomp.downcase
-    if input == "y"
-      start_game
-    else
-      menu
+  def self.continue(current_player)
+    loop do
+      puts "Would you like to start a new game, #{current_player.name}? [Y/N]"
+      input = gets.chomp.downcase
+
+      if input == "y"
+        start_game(current_player)
+      else
+        break
+      end
     end
   end
 end
