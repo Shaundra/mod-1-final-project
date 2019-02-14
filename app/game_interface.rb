@@ -48,7 +48,7 @@ class GameInterface
     new_game = Game.create
     new_game.player = current_player
     new_game.save
-    new_game.ask_questions(3)
+    new_game.ask_questions(5)
     new_game.show_ending_game_score
   end
 
