@@ -76,12 +76,16 @@ class GameInterface
       generate_ascii(display_user.name).split("\n").each { |line| puts line.center(linewidth) }
       puts "Game".ljust(linewidth / 4) + "Score".ljust(linewidth / 4) + "Correct Answers".ljust(linewidth / 4) + "Incorrect Answers".ljust(linewidth / 4)
       puts "-" * linewidth
+
       display_user.games.each_with_index do |game, idx|
         score = game.game_records.sum(:points).to_s
-        correct_ct = game.game_records.group("points > 0").having("points > 0").count.values[0].to_s
-        incorrect_ct = game.game_records.group(:points).having("points = 0").count.values[0].to_s
+        correct_ct = game.game_records.group("points > 0").count[1].to_i.to_s
+        incorrect_ct = game.game_records.group("points > 0").count[0].to_i.to_s
         puts "#{("Game " + (idx + 1).to_s).ljust(linewidth / 4)} #{score.ljust(linewidth / 4)} #{correct_ct.ljust(linewidth / 4)} #{incorrect_ct.ljust(linewidth / 4)}"
       end
+
+      total_row = display_user.get_total_history
+      puts "#{("All Games").ljust(linewidth / 4)} #{total_row[:points].ljust(linewidth / 4)} #{total_row[:correct_ct].ljust(linewidth / 4)} #{total_row[:incorrect_ct].ljust(linewidth / 4)}"
     else
       puts "That user wasn't found."
     end
