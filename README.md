@@ -19,7 +19,7 @@ rake run
 Install Ruby and Rails via [Rails installer](http://railsinstaller.org) then run the above commands.
 
 ## License
-This game makes use of the open-source music database project, [MusicDemons](https://musicdemons.com/api), and [ASCII Art API](https://artii.herokuapp.com/).
+This game makes use of the open-source music database project [MusicDemons](https://musicdemons.com/api), and [ASCII Art API](https://artii.herokuapp.com/).
 
 ### Demo
 ![demo](app/assets/demo.gif)
