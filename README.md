@@ -1,21 +1,24 @@
-### Guess from Lyrics Game
+## Guess from Lyrics Game
 
 ![menu](app/assets/guess_from_lyrics_top_menu.png)
 
 Guess from Lyrics is a CLI game where players guess the artist from the supplied lyrics.
 
-To get started playing, first clone this repository and then run!
+To get started playing, first clone this repository, bundle install dependencies, and then run!
 
 ```
-git@github.com:Shaundra/mod-1-final-project.git
+git clone git@github.com:Shaundra/mod-1-final-project.git
+cd mod-1-final-project
+bundle install
 rake run
 ```
 
-This game makes use of the open-source music database project, [MusicDemons](https://musicdemons.com/api).
+This game makes use of the open-source music database project, [MusicDemons](https://musicdemons.com/api) and [ASCII Art API](https://artii.herokuapp.com/).
 
-See a demo of the game [here](app/assets/demo.gif).
+### Demo
+![demo](app/assets/demo.gif).
 
-Next steps for Guess From Lyrics:
+### Next steps for Guess From Lyrics:
 - [ ] Adding additional game modes
   - select genres and/or decades for a game
   - reverse play (guess which lyrics belong to an artist)
