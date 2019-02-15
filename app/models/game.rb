@@ -59,6 +59,9 @@ class Game < ActiveRecord::Base
       response_artist = question[:display_answers][response - 1]
       save_answered_question(question, response_artist)
       display_correct_answer_and_score(question)
+      sleep 2
+      system("clear")
+      display_correct_answer_and_score(question)
     end
   end
 
@@ -103,11 +106,11 @@ class Game < ActiveRecord::Base
 
     puts "\n"
     longest_name_length = total_scores.max_by { |k, v| k.length }.first.length
-    puts "#{"Player".ljust(longest_name_length)} - #{"Score".rjust(4)}".center(60)
-    puts "--------------".center(60)
+    puts "#{"Player".ljust(longest_name_length)} \| #{"Score".rjust(4)}".center(60)
+    puts ("-" * 20).center(60)
     total_scores = total_scores.sort_by { |k, v| -v }
     total_scores.first(10).each do |plr_scr|
-      puts "#{plr_scr[0].ljust(longest_name_length)} - #{plr_scr[1].to_s.rjust(4)}".center(60)
+      puts "#{plr_scr[0].ljust(longest_name_length)} \| #{plr_scr[1].to_s.rjust(4)}".center(60)
     end
   end
 end

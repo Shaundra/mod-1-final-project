@@ -75,7 +75,7 @@ class GameInterface
     if display_user
       generate_ascii(display_user.name).split("\n").each { |line| puts line.center(linewidth) }
       puts "Game".ljust(linewidth / 4) + "Score".ljust(linewidth / 4) + "Correct Answers".ljust(linewidth / 4) + "Incorrect Answers".ljust(linewidth / 4)
-
+      puts "-" * linewidth
       display_user.games.each_with_index do |game, idx|
         score = game.game_records.sum(:points).to_s
         correct_ct = game.game_records.group("points > 0").having("points > 0").count.values[0].to_s
