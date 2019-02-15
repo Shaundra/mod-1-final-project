@@ -92,6 +92,7 @@ class Game < ActiveRecord::Base
     longest_line = longest_line = game_over_text.split("\n").max_by(&:size).size
     game_score = self.game_records.sum("points").to_s
 
+    system("clear")
     puts game_over_text
     puts "You Scored".center(longest_line)
     generate_ascii(game_score).split("\n").each { |line| puts line.center(longest_line) }
