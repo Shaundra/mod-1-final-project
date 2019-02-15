@@ -28,23 +28,17 @@ def merge_lyrics_songs(songs, lyrics)
 end
 
 def remove_no_lyric_songs(songs_array)
-  # there are 88 songs without lyrics
   songs_array.delete_if { |song| song["lyrics"].empty? }
 end
 
-# def lyrics_to_array(songs_array)
-#   songs_array.map do |song|
-#     song["lyrics"] = song["lyrics"][0]["lyrics"].split("\r\n")
-#     song["lyrics"].delete_if { |line| line.empty? }
-#   end
-# end
-#
 def seed_songs_and_artists(songs_array)
   songs_array.each do |song|
     new_song = Song.create(title: song["title"], lyrics: song["lyrics"][0]["lyrics"])
     new_song.release_date = Date.strptime(song["released"], '%m/%d/%Y') if song["released"]
+
     new_artist = Artist.find_or_create_by(name: song["artists"])
     new_song.artist_id = new_artist.id
+
     new_song.save
   end
 end

@@ -97,6 +97,8 @@
   - Presentation
     - Requirements:
       - Describe something you struggled to build, and show us how you ultimately implemented it in your code.
+        - Combining songs, artist, and lyrics data.
+        - Our chosen API wasn't quite flexible enough to pull the data our game needed in one call. So we defined a series of methods to combine the multiple calls, clean the data, and ultimately seed our database.
       - Discuss 3 things you learned in the process of working on this project.
         - Date.parse
           - It didn't take long to catch on, but it was a bit perplexing on first encounter.
