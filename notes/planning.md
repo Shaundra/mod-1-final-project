@@ -98,5 +98,20 @@
     - Requirements:
       - Describe something you struggled to build, and show us how you ultimately implemented it in your code.
       - Discuss 3 things you learned in the process of working on this project.
+        - Date.parse
+          - It didn't take long to catch on, but it was a bit perplexing on first encounter.
+          - Ruby's built-in Date class has a `parse` function. A quick look at the documentation doesn't immediately reveal the gotcha. But just like our rejection of the metric system, our country's refusal to conform to international standards is annoying.
+          - Date.parse() accepts strings in the form of 'YY-MM-DD', or 'DD-MM-YY'
+          - Enter Date.strptime(), which accepts a format string as an optional argument to clearly tell Ruby, we're in America! ::ahem::
+          - Admittedly, after switching to using Date.strptime(), we didn't try pushing Date.parse() to its limits.
+        - Formatting text for CL display
+          - fdsafsd
+        - UX is a whole thing
       - Address, if anything, what you would change or add to what you have today?
+        - Additional game modes
+            - limit by genre (find genre for the songs db), decade
+            - reverse play (guess which lyrics belong to provided artist)
+        - Hints (allow players to request two more lines of lyrics)
+        - Learn about our Songs Data (Analytics)
       - Present any code you would like to highlight.
+        - Because we provided a `break` option in our menu interface, our game loop could be extremely simple.
