@@ -2,7 +2,7 @@
 
 ![menu](app/assets/guess_from_lyrics_top_menu.png)
 
-Guess from Lyrics is a Ruby CLI game where players guess the artist from the supplied lyrics.
+Guess from Lyrics is a Ruby-based CLI game where players guess the artist from the supplied lyrics.
 
 To get started playing, first clone this repository, bundle install dependencies, and then run!
 
@@ -16,7 +16,7 @@ rake run
 This game makes use of the open-source music database project, [MusicDemons](https://musicdemons.com/api), and [ASCII Art API](https://artii.herokuapp.com/).
 
 ### Demo
-![demo](app/assets/demo.gif).
+![demo](app/assets/demo.gif)
 
 ### Next steps for Guess From Lyrics:
 - [ ] Adding additional game modes
