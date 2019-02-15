@@ -16,6 +16,13 @@ class GameInterface
     get_menu_input()
   end
 
+  def self.thank_you_for_playing
+    system("clear")
+    puts generate_ascii("Thank you")
+    puts generate_ascii("for playing.")
+    ""
+  end
+
   def self.get_menu_input(arg = nil)
     if arg == "try again"
       puts "Please input a command"
@@ -32,7 +39,7 @@ class GameInterface
       Game.display_leaderboard
     when "3"
       display_user_history
-    when "0" then abort("Thank you for playing")
+    when "0" then abort(GameInterface.thank_you_for_playing)
     else get_menu_input("try again")
     end
   end
