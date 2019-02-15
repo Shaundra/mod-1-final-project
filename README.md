@@ -1,6 +1,6 @@
 ### Guess from Lyrics Game
 
-![menu](app/assets/guess_from_lyrics_top_menu.png)
+![menu](app/assets/demo.gif)
 
 Guess from Lyrics is a CLI game where players guess the artist from the supplied lyrics.
 
